@@ -687,7 +687,7 @@ int MF_DrawFX_HitDamage(void)
 {
 	READ_ENTITY();
 
-	if(!g_Player.m_bHitDamage)
+	if (!g_Player.m_bHitDamage)
 		return 1;
 
 	int damage = READ_SHORT();
@@ -700,8 +700,21 @@ int MF_DrawFX_HitDamage(void)
 
 	R_HitDamageText(damage, vecSrc, crit);
 
-	gEngfuncs.pfnPlaySoundByName("CKF_III/hitsound.wav", 1);
-
+	int hitsoundNumber = gEngfuncs.pfnGetCvarFloat("tf_dingalingaling_effect");
+	switch (hitsoundNumber)
+	{
+		default:
+		{
+			gEngfuncs.pfnPlaySoundByName("CKF_III/hitsound.wav", 1);
+			// just in case the number is too high or low, it defaults to the stock hitsound
+			// i will eventually add a menu for this
+			// i also plan on adding much more custom hitsounds than the tf2 version!!
+		}
+		case 2:
+		{
+			gEngfuncs.pfnPlaySoundByName("CKF_III/hitsound_beepo.wav", 1);
+		}
+	}
 	return 1;
 }
 
