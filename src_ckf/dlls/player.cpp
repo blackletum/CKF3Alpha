@@ -3939,7 +3939,7 @@ void CBasePlayer::Spawn(void)
 	pev->takedamage = DAMAGE_AIM;
 	pev->solid = SOLID_SLIDEBOX;
 	pev->movetype = MOVETYPE_WALK;
-	pev->flags &= FL_PROXY;
+	pev->flags &= FL_PROXY | FL_FAKECLIENT;
 	pev->flags |= FL_CLIENT;
 	pev->air_finished = gpGlobals->time + 12;
 	pev->dmg = 2;

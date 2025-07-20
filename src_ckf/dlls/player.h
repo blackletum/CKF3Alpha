@@ -360,7 +360,7 @@ public:
 	virtual BOOL IsSneaking(void) { return m_tSneaking <= gpGlobals->time; }
 	virtual BOOL IsAlive(void) { return pev->deadflag == DEAD_NO && pev->health > 0; }
 	virtual BOOL IsPlayer(void) { return TRUE; }
-	virtual BOOL IsNetClient(void) { return TRUE; }
+	virtual BOOL IsNetClient() override { return (pev->flags & FL_FAKECLIENT) == 0; }
 	virtual const char *TeamID(void);
 	virtual BOOL FBecomeProne(void);
 	virtual Vector BodyTarget(const Vector &posSrc) { return Center() + pev->view_ofs * RANDOM_FLOAT(0.5, 1.1); }
@@ -789,6 +789,11 @@ public:
 	CBaseBuildable *m_pCarryBuild;
 	CBaseBuildable *m_pBuildable[4];
 	bool m_bAutoReload;
+	/**
+	*    @brief True if the player is currently connected to the server.
+	*    Should only be false in multiplayer games, for players that have disconnected.
+	*/
+	bool m_bIsConnected = true;
 };
 
 #define UC_INVULNERABLE (1<<0)
