@@ -52,7 +52,6 @@ cvar_t *cl_corpsefade = NULL;
 cvar_t *cl_3dhud = NULL;
 cvar_t *cl_autoreload = NULL;
 cvar_t *hud_saytext_time;
-cvar_t *tf_dingalingaling_effect;
 
 pfnUserMsgHook g_pfnMSG_SetFOV;
 pfnUserMsgHook g_pfnMSG_MOTD;
@@ -354,7 +353,6 @@ void CHud::Init(void)
 	cl_min_t = gEngfuncs.pfnGetCvarPointer("cl_min_t");
 	cl_min_ct = gEngfuncs.pfnGetCvarPointer("cl_min_ct");
 	cl_corpsestay = gEngfuncs.pfnGetCvarPointer("cl_corpsestay");
-	tf_dingalingaling_effect = gEngfuncs.pfnRegisterVariable("tf_dingalingaling_effect", "1", FCVAR_ARCHIVE);
 	cl_corpsefade = gEngfuncs.pfnRegisterVariable("cl_corpsefade", "0", FCVAR_ARCHIVE);
 	cl_crosshair_type = gEngfuncs.pfnRegisterVariable("cl_crosshair_type", "0", FCVAR_ARCHIVE);
 	cl_killeffect = gEngfuncs.pfnRegisterVariable("cl_killeffect", "1", FCVAR_ARCHIVE);

@@ -803,6 +803,5 @@ extern struct cvar_s *cl_min_ct;
 extern struct cvar_s *cl_corpsestay;
 extern struct cvar_s *cl_corpsefade;
 extern struct cvar_s *cl_3dhud;
-extern struct cvar_s *tf_dingalingaling_effect;
 
 #endif
