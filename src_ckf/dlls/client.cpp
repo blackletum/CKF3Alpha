@@ -1960,7 +1960,6 @@ void StartFrame(void)
 			player->m_iTeam = TEAM_SPECTATOR;
 		}
 
-
 		//If bot is newly created finish setup here.
 
 		//Run bot think here.
@@ -1978,11 +1977,15 @@ void StartFrame(void)
 		{
 			HandleMenu_ChooseClass(player, RANDOM_LONG(1, 9));
 			//bots autopick a class
-
+			player->SetPlayerModel();
+			player->Spawn();
 			//player->m_iClass = RANDOM_LONG(1,9);
 			//player->Respawn_Start();
 			//player->RoundRespawn();
 		}
+		
+
+
 
 		//If bot is newly created finish setup here.
 

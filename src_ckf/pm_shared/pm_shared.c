@@ -2057,7 +2057,7 @@ void PM_Jump(void)
 		pmove->onground = -1;
 
 		PM_CatagorizeTextureType();
-		PM_PreventMegaBunnyJumping();
+		//PM_PreventMegaBunnyJumping();
 
 		if (Length(pmove->velocity) >= 150)
 			PM_PlayStepSound(PM_MapTextureTypeStepType(pmove->chtexturetype), 1);

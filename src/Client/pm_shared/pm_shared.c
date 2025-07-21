@@ -2478,7 +2478,7 @@ void PM_Jump (void)
 
 	if (pmove->dead)
 	{
-		pmove->oldbuttons |= IN_JUMP ;	// don't jump again until released
+		//pmove->oldbuttons |= IN_JUMP ;	// don't jump again until released
 		return;
 	}
 
@@ -2545,17 +2545,17 @@ void PM_Jump (void)
 		// Flag that we jumped.
 		// HACK HACK HACK
 		// Remove this when the game .dll no longer does physics code!!!!
-		pmove->oldbuttons |= IN_JUMP;	// don't jump again until released
+		//pmove->oldbuttons |= IN_JUMP;	// don't jump again until released
 		return;		// in air, so no effect
 	}
 
-	if ( pmove->oldbuttons & IN_JUMP )
-		return;		// don't pogo stick
+	//if ( pmove->oldbuttons & IN_JUMP )
+		//return;		// don't pogo stick
 
 	// In the air now.
     pmove->onground = -1;
 
-	PM_PreventMegaBunnyJumping();
+	//PM_PreventMegaBunnyJumping();
 
 	if ( tfc )
 	{
@@ -3064,7 +3064,7 @@ void PM_PlayerMove ( qboolean server )
 		}
 		else
 		{
-			pmove->oldbuttons &= ~IN_JUMP;
+			//pmove->oldbuttons &= ~IN_JUMP;
 		}
 		
 		// Perform the move accounting for any base velocity.
@@ -3112,7 +3112,7 @@ void PM_PlayerMove ( qboolean server )
 			}
 			else
 			{
-				pmove->oldbuttons &= ~IN_JUMP;
+				//pmove->oldbuttons &= ~IN_JUMP;
 			}
 
 			// Perform regular water movement
@@ -3137,7 +3137,7 @@ void PM_PlayerMove ( qboolean server )
 			}
 			else
 			{
-				pmove->oldbuttons &= ~IN_JUMP;
+				//pmove->oldbuttons &= ~IN_JUMP;
 			}
 
 			// Fricion is handled before we add in any base velocity. That way, if we are on a conveyor, 
