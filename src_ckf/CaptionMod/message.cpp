@@ -6,6 +6,7 @@
 #include "client.h"
 #include "util.h"
 #include "weapon.h"
+#include "cvar.h"
 #include "hud_localize.h"
 
 pfnUserMsgHook pfnMsgFunc_Health;
@@ -647,7 +648,7 @@ int MF_DrawFX_CritHit(void)
 		gEngfuncs.pfnPlaySoundByName(sound, 1);
 	}
 
-	if(bShowSound)
+	if (bShowSound)
 	{
 		sprintf(sound, "CKF_III/crit_hit%d.wav", RANDOM_LONG(1, 5));
 		gEngfuncs.pEventAPI->EV_PlaySound(refparams.viewentity, vecSrc, CHAN_STATIC, sound, 1, 1, 0, 100);

@@ -1936,7 +1936,7 @@ void StartFrame(void)
 
 	g_LastBotUpdateTime = gpGlobals->time;
 
-	for (int i = 1; i <= gpGlobals->maxClients; ++i)
+	for (int i = 0; i <= gpGlobals->maxEntities; ++i)
 	{
 		auto player = static_cast<CBasePlayer*>(UTIL_PlayerByIndex(i));
 
@@ -1957,7 +1957,7 @@ void StartFrame(void)
 
 		if (player->m_iTeam == TEAM_UNASSIGNED)
 		{
-			player->m_iTeam = TEAM_SPECTATOR;
+			player->m_iTeam == TEAM_SPECTATOR;
 		}
 
 		//If bot is newly created finish setup here.
@@ -1967,33 +1967,30 @@ void StartFrame(void)
 		if (player->m_iTeam != TEAM_BLU && player->m_iTeam != TEAM_RED)
 		{
 			HandleMenu_ChooseTeam(player, 0);
-			// if not on a team, bots automatically pick the autoteam 
-			//UTIL_SayTextAll("picked team", player);
+			// if not on a team, bots automatically pick the team 
 		}
-
-
-
 		if (!(player->m_iClass <= CLASS_SPY && player->m_iClass >= CLASS_SCOUT))
 		{
 			HandleMenu_ChooseClass(player, RANDOM_LONG(1, 9));
 			//bots autopick a class
-			player->SetPlayerModel();
-			player->Spawn();
-			//player->m_iClass = RANDOM_LONG(1,9);
+			//player->SetPlayerModel();
 			//player->Respawn_Start();
-			//player->RoundRespawn();
 		}
-		
-
-
-
 		//If bot is newly created finish setup here.
 
 		//Run bot think here.
-
+		
+		//int buttons = 0;
+		//player->pev->button |= IN_ATTACK;
 
 		//Now update the bot.
-		g_engfuncs.pfnRunPlayerMove(player->edict(), player->pev->angles, 0, 0, 0, player->pev->button, player->pev->impulse, msec);
+		float vel[3] = { 0 }; // assign all items with 0
+		//for (int i = 0; i < 3; ++i) {
+			//vel[i] = player->pev->velocity[i];
+		//}
+		PlayerPreThink(player->edict());
+		PlayerPostThink(player->edict());
+		g_engfuncs.pfnRunPlayerMove(player->edict(), player->pev->angles, vel[0], vel[1], vel[2], player->pev->button, player->pev->impulse, msec);
 	}
 }
 

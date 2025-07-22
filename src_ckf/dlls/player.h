@@ -361,6 +361,7 @@ public:
 	virtual BOOL IsAlive(void) { return pev->deadflag == DEAD_NO && pev->health > 0; }
 	virtual BOOL IsPlayer(void) { return TRUE; }
 	virtual BOOL IsNetClient() override { return (pev->flags & FL_FAKECLIENT) == 0; }
+	//virtual BOOL IsNetClient(void) { return TRUE; }
 	virtual const char *TeamID(void);
 	virtual BOOL FBecomeProne(void);
 	virtual Vector BodyTarget(const Vector &posSrc) { return Center() + pev->view_ofs * RANDOM_FLOAT(0.5, 1.1); }

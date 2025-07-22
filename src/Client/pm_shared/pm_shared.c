@@ -2603,7 +2603,7 @@ void PM_Jump (void)
 	PM_FixupGravityVelocity();
 
 	// Flag that we jumped.
-	pmove->oldbuttons |= IN_JUMP;	// don't jump again until released
+	//pmove->oldbuttons |= IN_JUMP;	// don't jump again until released
 }
 
 /*
