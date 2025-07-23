@@ -1234,7 +1234,7 @@ Vector CBaseEntity::CKFFireBullets(Vector vecSrc, Vector vecDirShooting, float f
 		{
 		case BULLET_PLAYER_SNIPER: case BULLET_PLAYER_SNIPER_NOHS:
 			{
-				iCurrentDamage = iDamage + (int)RANDOM_FLOAT(-iDamage*0.14, iDamage*0.14);
+				iCurrentDamage = iDamage; // +(int)RANDOM_FLOAT(-iDamage*0.14, iDamage*0.14);
 				if(tr.iHitgroup == HITGROUP_HEAD && iBulletType != BULLET_PLAYER_SNIPER_NOHS)
 					iCrit += 2;
 				break;
@@ -1253,7 +1253,7 @@ Vector CBaseEntity::CKFFireBullets(Vector vecSrc, Vector vecDirShooting, float f
 			}
 			default:
 			{
-				iCurrentDamage = iDamage + (int)RANDOM_FLOAT(-iDamage*0.14, iDamage*0.14);
+				iCurrentDamage = iDamage; // +(int)RANDOM_FLOAT(-iDamage*0.14, iDamage*0.14) this is random damage spread. for now it is disabled
 				break;
 			}
 		}
@@ -1265,7 +1265,8 @@ Vector CBaseEntity::CKFFireBullets(Vector vecSrc, Vector vecDirShooting, float f
 				flDamageModifier = 3;
 			else if(iCrit == 1)
 				flDamageModifier *= 1.35;
-
+			/*
+			
 			if(iBulletType == BULLET_SENTRY_TF2)
 			{
 				CBaseEntity *pAttacker = CBaseEntity::Instance(pevAttacker);
@@ -1279,9 +1280,20 @@ Vector CBaseEntity::CKFFireBullets(Vector vecSrc, Vector vecDirShooting, float f
 					}
 				}
 			}
+			
+			this was specific for sentries
+			this is no longer used due to me using the other knockback equation below
+
+			*/
 		}
 
 		iCurrentDamage = int(iDamage * flDamageModifier);
+		float knockback = min(1000, iCurrentDamage * 1.0 * 9.0);
+		// this is the damage knockback equation from tf2 (thanks wget)
+		// as of right now it feels accurate, minus some changes ( no heavy resistance yet, no tiny boost from crouching due to this not checking the volume, whatever else i forgot )
+		// todo: add the other stuff related to this formula ( see above )
+		pEntity->KnockBack(vecDir, knockback);
+
 #ifndef CLIENT_WEAPONS
 		DecalGunshot(&tr, iBulletType, FALSE, pev, bShowSparks);
 #endif
