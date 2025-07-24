@@ -1935,8 +1935,9 @@ void StartFrame(void)
 	const byte msec = byte(frametime * 1000);
 
 	g_LastBotUpdateTime = gpGlobals->time;
-
-	for (int i = 0; i <= gpGlobals->maxEntities; ++i)
+	
+	int i = 0;
+	for (i = 0; i <= gpGlobals->maxClients; ++i)
 	{
 		auto player = static_cast<CBasePlayer*>(UTIL_PlayerByIndex(i));
 
@@ -1972,24 +1973,16 @@ void StartFrame(void)
 		if (!(player->m_iClass <= CLASS_SPY && player->m_iClass >= CLASS_SCOUT))
 		{
 			HandleMenu_ChooseClass(player, RANDOM_LONG(1, 9));
-			//bots autopick a class
-			//player->SetPlayerModel();
-			//player->Respawn_Start();
 		}
-		//If bot is newly created finish setup here.
-
-		//Run bot think here.
 		
-		//int buttons = 0;
-		//player->pev->button |= IN_ATTACK;
+		PlayerPreThink(player->edict());
+		PlayerPostThink(player->edict());
 
-		//Now update the bot.
 		float vel[3] = { 0 }; // assign all items with 0
 		//for (int i = 0; i < 3; ++i) {
 			//vel[i] = player->pev->velocity[i];
 		//}
-		PlayerPreThink(player->edict());
-		PlayerPostThink(player->edict());
+		//player->entindex();
 		g_engfuncs.pfnRunPlayerMove(player->edict(), player->pev->angles, vel[0], vel[1], vel[2], player->pev->button, player->pev->impulse, msec);
 	}
 }

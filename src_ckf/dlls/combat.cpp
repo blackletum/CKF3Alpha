@@ -1293,7 +1293,7 @@ Vector CBaseEntity::CKFFireBullets(Vector vecSrc, Vector vecDirShooting, float f
 
 		if (disableDamageSpread != 1)
 		{
-			iCurrentDamage = iDamage + (int)RANDOM_FLOAT(-iDamage*0.14, iDamage*0.14); // random damage spread
+			iCurrentDamage += (int)RANDOM_FLOAT(-iDamage*0.14, iDamage*0.14); // random damage spread
 		}
 
 		float knockback = min(1000, iCurrentDamage * 1.0 * 9.0);
