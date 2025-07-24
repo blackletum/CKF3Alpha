@@ -1234,7 +1234,7 @@ Vector CBaseEntity::CKFFireBullets(Vector vecSrc, Vector vecDirShooting, float f
 		{
 		case BULLET_PLAYER_SNIPER: case BULLET_PLAYER_SNIPER_NOHS:
 			{
-				iCurrentDamage = iDamage; // +(int)RANDOM_FLOAT(-iDamage*0.14, iDamage*0.14);
+				iCurrentDamage = iDamage;
 				if(tr.iHitgroup == HITGROUP_HEAD && iBulletType != BULLET_PLAYER_SNIPER_NOHS)
 					iCrit += 2;
 				break;
@@ -1253,7 +1253,7 @@ Vector CBaseEntity::CKFFireBullets(Vector vecSrc, Vector vecDirShooting, float f
 			}
 			default:
 			{
-				iCurrentDamage = iDamage; // +(int)RANDOM_FLOAT(-iDamage*0.14, iDamage*0.14) this is random damage spread. for now it is disabled
+				iCurrentDamage = iDamage;
 				break;
 			}
 		}
@@ -1288,6 +1288,14 @@ Vector CBaseEntity::CKFFireBullets(Vector vecSrc, Vector vecDirShooting, float f
 		}
 
 		iCurrentDamage = int(iDamage * flDamageModifier);
+
+		int disableDamageSpread = (int)CVAR_GET_FLOAT("tf_damage_disablespread");
+
+		if (disableDamageSpread != 1)
+		{
+			iCurrentDamage = iDamage + (int)RANDOM_FLOAT(-iDamage*0.14, iDamage*0.14); // random damage spread
+		}
+
 		float knockback = min(1000, iCurrentDamage * 1.0 * 9.0);
 		// this is the damage knockback equation from tf2 (thanks wget)
 		// as of right now it feels accurate, minus some changes ( no heavy resistance yet, no tiny boost from crouching due to this not checking the volume, whatever else i forgot )

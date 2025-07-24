@@ -32,6 +32,7 @@ cvar_t bluminrespawn = { "mp_bluminrespawn", "5", FCVAR_SERVER };
 cvar_t respawnplayerfactor = { "mp_respawn_playerfactor", "1", FCVAR_SERVER };
 cvar_t respawnplayernum = { "mp_respawn_playernum", "8", FCVAR_SERVER };
 cvar_t disablerespawn = { "mp_disable_respawn", "0", FCVAR_SERVER };
+cvar_t randomdamagespread = { "tf_damage_disablespread", "1", FCVAR_SERVER };
 
 cvar_t buytime = { "mp_buytime", "1.5", FCVAR_SERVER };
 cvar_t c4timer = { "mp_c4timer", "45", FCVAR_SERVER };
@@ -469,6 +470,7 @@ void GameDLLInit(void)
 	CVAR_REGISTER(&respawnplayerfactor);
 	CVAR_REGISTER(&respawnplayernum);
 	CVAR_REGISTER(&disablerespawn);
+	CVAR_REGISTER(&randomdamagespread);
 
 	CVAR_REGISTER(&restartround);
 	CVAR_REGISTER(&sv_restart);
